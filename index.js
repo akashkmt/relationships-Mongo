@@ -44,3 +44,11 @@ const mongoose = require('mongoose');
 // }
 
 
+const blogSchema = new mongoose.Schema({
+    title: String,
+    body: String,
+    category_ids: [mongoose.Schema.Types.ObjectId],
+    user_id: mongoose.Schema.Types.ObjectId
+}
+);
+
