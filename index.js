@@ -1,49 +1,5 @@
 const mongoose = require('mongoose');
 
-// Blogs = {
-//     _id : "ObjectId by Default",
-//     title: String,
-//     body: String,
-//     category_ids: [ ObjectIds()]
-//     }
-// Users = {
-//     _id : "ObjectId by Default",
-//     name: String,
-//     email: String,
-//     social_profile : {
-//         linkedIn: String,
-//         facebook: String,
-//         twiter: String,
-//         github: String,
-//         instagram: String,
-//     },
-//     addresses: [{
-//         Line1: String,
-//         City: String,
-//         State: String,
-//         PinCode: String,
-//     }],
-//     Blog_id : [ObjectId()]
-//     }
-// Category = {
-//     _id : "ObjectId by Default",
-//     name: String
-// }
-// Comments = {
-//     _id: "ObjectId by Default",
-//     Blog_id: [ObjectId()],
-//     User_id: [ObjectId()],
-//     message: String,
-//     rating : String
-// }
-// Likes = {
-//     _id: "ObjectId by Default",
-//     User_id: [ObjectId()],
-//     Blog_id: [ObjectId()],
-//     emoji: String
-// }
-
-
 const blogSchema = new mongoose.Schema({
     title: String,
     body: String,
@@ -52,3 +8,48 @@ const blogSchema = new mongoose.Schema({
 }
 );
 
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    social_profile: {
+        linkedIn: String,
+        facebook: String,
+        twiter: String,
+        github: String,
+        instagram: String,
+    },
+    addresses: [{
+        Line1: String,
+        City: String,
+        State: String,
+        PinCode: String,
+    }],
+    blog_id: [mongoose.Schema.Types.ObjectId]
+}
+);
+
+const categorySchema = new mongoose.Schema({
+    name: String
+}
+);
+
+const commentSchema = new mongoose.Schema({
+    message: String,
+    rating: String,
+    blog_id: [mongoose.Schema.Types.ObjectId],
+    user_id: [mongoose.Schema.Types.ObjectId]
+}
+);
+
+const likeSchema = new mongoose.Schema({
+    emoji: String,
+    blog_id: [mongoose.Schema.Types.ObjectId],
+    user_id: [mongoose.Schema.Types.ObjectId]
+}
+);
+
+const Blog = mongoose.model('Blog', blogSchema);
+const User = mongoose.model('User', userSchema);
+const Category = mongoose.model('Category', categorySchema);
+const Comment = mongoose.model('Comment', commentSchema);
+const Like = mongoose.model('Like', likeSchema);
